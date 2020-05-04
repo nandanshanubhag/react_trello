@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.login-container {
+  background-color: #eee;
+  padding: 40px 30px;
+  box-shadow: 3px 3px 7px -2px;
+  border-radius: 5px;
+}
+
+.form-control.is-invalid {
+  background-image: none;
+}

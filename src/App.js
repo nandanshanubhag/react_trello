@@ -1,10 +1,10 @@
-import React from 'react';
-import './App.css';
+import React from "react";
+import "./App.css";
+
+import { LoginPage } from "./LoginPage";
 
 function App() {
-  return (
-    <button className="btn btn-primary">Hello</button>
-  );
+  return <LoginPage></LoginPage>;
 }
 
 export default App;
