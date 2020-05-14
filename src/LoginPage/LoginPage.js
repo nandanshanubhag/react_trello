@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import validator from 'validator';
 
 import './LoginPage.css';
 import { auth } from '../actions';
@@ -9,7 +11,7 @@ class LoginPage extends React.Component {
     super(props);
 
     this.state = {
-      username: {
+      email: {
         value: '',
         isValid: false
       },
@@ -24,16 +26,28 @@ class LoginPage extends React.Component {
   onValueChange = (event) => {
     event.persist();
     const { name, value } = event.target;
-    const isValid = !!value;
+    let isValid = true;
+    const { submitted } = this.state;
+    if (submitted) {
+      isValid = this.checkIfValid(name, value);
+    }
+
     this.setState({ [name]: { ...this.state[name], value, isValid } });
+  };
+
+  checkIfValid = (name, value) => {
+    if (name === 'email') {
+      return validator.isEmail(value);
+    }
+    return !!value;
   };
 
   onSubmit = (event) => {
     event.preventDefault();
     this.setState({ submitted: true });
-    const { username, password } = this.state;
-    if (username.value && password.value) {
-      this.props.login();
+    const { email, password } = this.state;
+    if (email.isValid && password.isValid) {
+      this.props.login(email.value, password.value);
     }
   };
 
@@ -44,30 +58,30 @@ class LoginPage extends React.Component {
 
   render() {
     const { isLoggingIn } = this.props;
-    const { username, password, submitted } = this.state;
-    console.log(username);
+    const { email, password, submitted } = this.state;
 
     return (
       <div className="container">
         <div className="login-container col-md-6">
           <form onSubmit={this.onSubmit} noValidate>
             <div className="form-group">
-              <label htmlFor="email">Username or Email</label>
+              <label htmlFor="email">Email</label>
               <input
-                type="text"
-                id="username"
-                name="username"
-                className={this.formControlClass(username)}
-                placeholder="Enter username or email"
+                type="email"
+                id="email"
+                name="email"
+                className={this.formControlClass(email)}
+                placeholder="Enter email"
                 autoComplete="off"
-                value={username.value}
+                value={email.value}
                 onChange={this.onValueChange}
                 required
               />
-              {submitted && !username.isValid && (
-                <div className="invalid-feedback">
-                  Username or Email required
-                </div>
+              {submitted && !email.value && (
+                <div className="invalid-feedback">Email is required</div>
+              )}
+              {submitted && email.value && !email.isValid && (
+                <div className="invalid-feedback">Enter a valid email</div>
               )}
             </div>
             <div className="form-group">
@@ -82,7 +96,7 @@ class LoginPage extends React.Component {
                 onChange={this.onValueChange}
                 required
               />
-              {submitted && !password.isValid && (
+              {submitted && !password.value && (
                 <div className="invalid-feedback">Password is required</div>
               )}
             </div>
@@ -92,9 +106,9 @@ class LoginPage extends React.Component {
             >
               {isLoggingIn ? 'Please wait...' : 'Login'}
             </button>
-            <button type="button" className="btn btn-link">
+            <Link to="/register" className="btn btn-link">
               Register
-            </button>
+            </Link>
           </form>
         </div>
       </div>
@@ -102,19 +116,15 @@ class LoginPage extends React.Component {
   }
 }
 
-const mapState = (state) => {
-  const {
-    authentication: { isLoggingIn }
-  } = state;
+const mapStateToProp = ({ authentication }) => {
+  const { isLoggingIn } = authentication;
 
   return { isLoggingIn };
 };
 
-const mapDispatch = (dispatch) => ({
-  login: () => {
-    dispatch(auth.login());
-  }
-});
+const mapDispatchToProps = {
+  login: auth.login
+};
 
-const connection = connect(mapState, mapDispatch)(LoginPage);
+const connection = connect(mapStateToProp, mapDispatchToProps)(LoginPage);
 export { connection as LoginPage };
