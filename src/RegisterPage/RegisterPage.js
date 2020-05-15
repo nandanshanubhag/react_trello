@@ -28,11 +28,8 @@ class RegisterPage extends React.Component {
   onValueChange = (event) => {
     event.persist();
     const { name, value } = event.target;
-    let isValid;
-    const { submitted } = this.state;
-    if (submitted) {
-      isValid = this.checkIfValid(name, value);
-    }
+
+    const isValid = this.checkIfValid(name, value);
     this.setState({ [name]: { ...this.state[name], value, isValid } });
   };
 
@@ -52,7 +49,7 @@ class RegisterPage extends React.Component {
     const { email, password, confirmPassword } = this.state;
     if (email.isValid && password.isValid && confirmPassword.isValid) {
       if (password.value === confirmPassword.value) {
-        this.props.signup();
+        this.props.register(email.value, password.value);
       }
     }
   };
@@ -152,9 +149,9 @@ const mapStateToProp = ({ authentication }) => {
   return { registering };
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  signup: () => dispatch(auth.signUp())
-});
+const mapDispatchToProps = {
+  register: auth.register
+};
 
 const connection = connect(mapStateToProp, mapDispatchToProps)(RegisterPage);
 export { connection as RegisterPage };

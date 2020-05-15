@@ -1,6 +1,1 @@
-export const authActions = {
-  LOGGING_IN: 'LOGGING_IN',
-  REGISTERING: 'REGISTERING',
-  LOGIN_SUCCESS: 'LOGIN_SUCCESS',
-  LOGIN_FAILED: 'LOGIN_FAILED'
-};
+export * from './authentication'

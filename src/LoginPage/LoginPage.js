@@ -26,11 +26,7 @@ class LoginPage extends React.Component {
   onValueChange = (event) => {
     event.persist();
     const { name, value } = event.target;
-    let isValid = true;
-    const { submitted } = this.state;
-    if (submitted) {
-      isValid = this.checkIfValid(name, value);
-    }
+    const isValid = this.checkIfValid(name, value);
 
     this.setState({ [name]: { ...this.state[name], value, isValid } });
   };
