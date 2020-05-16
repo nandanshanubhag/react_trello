@@ -2,8 +2,8 @@ import React from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 
-import { LoginPage } from './LoginPage';
-import { RegisterPage } from './RegisterPage';
+import { LoginPage } from './containers/LoginPage';
+import { RegisterPage } from './containers/RegisterPage';
 import history from './utils/history';
 
 function App() {

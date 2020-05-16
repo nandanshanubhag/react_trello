@@ -1,4 +1,4 @@
-import { authActions } from '../constants';
+import { authActions, authMessages } from '../constants';
 import { authService } from '../services/auth.service';
 import history from '../utils/history';
 
@@ -12,8 +12,8 @@ const login = (email, password) => {
       dispatch({ type: authActions.LOGIN_SUCCESS, user });
       history.push('/');
     } catch (err) {
-      console.log('Login failed', err);
-      dispatch({ type: authActions.LOGIN_FAILED });
+      console.log('Login failed', err.message || err);
+      dispatch({ type: authActions.LOGIN_FAILED, message: err.message });
     }
   };
 };
@@ -27,17 +27,28 @@ const register = (email, password) => {
     try {
       const user = await authService.register(email, password);
       console.log(user);
-      dispatch({ type: authActions.REGISTER_SUCCESS, user });
+      dispatch({
+        type: authActions.REGISTER_SUCCESS,
+        user,
+        message: authMessages.REGISTERED_SUCCESSFULLY
+      });
       history.push('/login');
-    } catch (error) {
-      console.log('User registration failed', error);
-      dispatch({ type: authActions.REGISTER_FAILED });
+    } catch (err) {
+      console.log('User registration failed', err.message || err);
+      dispatch({ type: authActions.REGISTER_FAILED, message: err.message });
     }
+  };
+};
+
+const resetAuthState = () => {
+  return (dispatch) => {
+    dispatch({ type: authActions.RESET });
   };
 };
 
 export const auth = {
   login,
   logout,
-  register
+  register,
+  resetAuthState
 };

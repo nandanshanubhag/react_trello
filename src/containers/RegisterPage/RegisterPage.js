@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import validator from 'validator';
 import { connect } from 'react-redux';
-import { auth } from '../actions';
+import { auth } from '../../actions';
 
 class RegisterPage extends React.Component {
   constructor(props) {
@@ -23,6 +23,10 @@ class RegisterPage extends React.Component {
       },
       submitted: false
     };
+  }
+
+  componentDidMount() {
+    this.props.resetAuthState();
   }
 
   onValueChange = (event) => {
@@ -150,7 +154,8 @@ const mapStateToProp = ({ authentication }) => {
 };
 
 const mapDispatchToProps = {
-  register: auth.register
+  register: auth.register,
+  resetAuthState: auth.resetAuthState
 };
 
 const connection = connect(mapStateToProp, mapDispatchToProps)(RegisterPage);

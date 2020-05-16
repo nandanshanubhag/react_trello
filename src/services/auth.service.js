@@ -1,13 +1,17 @@
 import fetch from 'cross-fetch';
 
 const handleResponse = (response) => {
+  console.log('response', response);
+
   return response.text().then((text) => {
     const data = text && JSON.parse(text);
+    console.log('data', data);
+
     if (!response.ok) {
       if (response.status === 401) {
       }
 
-      const error = (data && data.message) || response.statusText;
+      const error = (data && data.error) || response.statusText;
       return Promise.reject(error);
     }
 

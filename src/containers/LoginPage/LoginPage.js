@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import validator from 'validator';
 
 import './LoginPage.css';
-import { auth } from '../actions';
+import { auth } from '../../actions';
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -53,12 +53,28 @@ class LoginPage extends React.Component {
   };
 
   render() {
-    const { isLoggingIn } = this.props;
+    const {
+      loggingIn,
+      message,
+      registered,
+      loginFailed
+    } = this.props.authentication;
     const { email, password, submitted } = this.state;
 
     return (
       <div className="container">
         <div className="login-container col-md-6">
+          {loginFailed && message && (
+            <div className="alert alert-danger" role="alert">
+              {message}
+            </div>
+          )}
+          {registered && message && (
+            <div className="alert alert-success" role="alert">
+              {message}
+            </div>
+          )}
+          <div className="title">Login</div>
           <form onSubmit={this.onSubmit} noValidate>
             <div className="form-group">
               <label htmlFor="email">Email</label>
@@ -97,10 +113,10 @@ class LoginPage extends React.Component {
               )}
             </div>
             <button
-              type={isLoggingIn ? 'button' : 'submit'}
+              type={loggingIn ? 'button' : 'submit'}
               className="btn btn-primary"
             >
-              {isLoggingIn ? 'Please wait...' : 'Login'}
+              {loggingIn ? 'Please wait...' : 'Login'}
             </button>
             <Link to="/register" className="btn btn-link">
               Register
@@ -113,9 +129,7 @@ class LoginPage extends React.Component {
 }
 
 const mapStateToProp = ({ authentication }) => {
-  const { isLoggingIn } = authentication;
-
-  return { isLoggingIn };
+  return { authentication };
 };
 
 const mapDispatchToProps = {

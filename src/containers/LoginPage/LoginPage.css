@@ -14,3 +14,9 @@
 .form-control.is-invalid {
   background-image: none;
 }
+
+.title {
+  text-align: center;
+  font-size: 24px;
+  font-weight: 400;
+}
