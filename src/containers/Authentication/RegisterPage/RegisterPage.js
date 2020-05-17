@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import validator from 'validator';
 import { connect } from 'react-redux';
-import { auth } from '../../actions';
+import { auth } from '../../../actions';
 
 class RegisterPage extends React.Component {
   constructor(props) {

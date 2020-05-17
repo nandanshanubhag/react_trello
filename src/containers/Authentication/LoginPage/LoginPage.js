@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import validator from 'validator';
 
 import './LoginPage.css';
-import { auth } from '../../actions';
+import { auth } from '../../../actions';
 
 class LoginPage extends React.Component {
   constructor(props) {
