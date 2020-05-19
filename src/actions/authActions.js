@@ -32,7 +32,7 @@ const register = (email, password) => {
         user,
         message: authMessages.REGISTERED_SUCCESSFULLY
       });
-      history.push('/login');
+      history.push('/board');
     } catch (err) {
       console.log('User registration failed', err.message || err);
       dispatch({ type: authActions.REGISTER_FAILED, message: err.message });

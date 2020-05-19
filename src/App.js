@@ -4,6 +4,7 @@ import './App.css';
 
 import { LoginPage } from './containers/Authentication/LoginPage';
 import { RegisterPage } from './containers/Authentication/RegisterPage';
+import { BoardsPage } from './containers/Boards/Boards';
 import history from './utils/history';
 
 function App() {
@@ -16,7 +17,10 @@ function App() {
         <Route path="/register">
           <RegisterPage />
         </Route>
-        <Redirect from="*" to="/login" />
+        <Route path="/board">
+          <BoardsPage />
+        </Route>
+        <Redirect from="*" to="/board" />
       </Switch>
     </Router>
   );
