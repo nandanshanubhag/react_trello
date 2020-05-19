@@ -36,8 +36,11 @@ const HomeIcon = styled(FaHome)`
 
 const Logo = styled.a`
   align-self: center;
-  color: #fff;
-  text-decoration: none;
+  color: #eee;
+  text-decoration: none !important;
+  &:hover {
+    color: #fff;
+  }
 `;
 
 export const Header = () => {
