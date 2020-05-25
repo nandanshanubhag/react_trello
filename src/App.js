@@ -2,9 +2,7 @@ import React from 'react';
 import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import './App.css';
 
-import { LoginPage } from './containers/Authentication/LoginPage';
-import { RegisterPage } from './containers/Authentication/RegisterPage';
-import { BoardsPage } from './containers/Boards/Boards';
+import { LoginPage, RegisterPage, BoardsPage } from './containers';
 import history from './utils/history';
 
 function App() {
