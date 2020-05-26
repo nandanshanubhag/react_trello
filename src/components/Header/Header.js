@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from 'react-bootstrap/Button';
 import { FaHome, FaPlus } from 'react-icons/fa';
+import { NewBoard } from './NewBoard';
 
 const Navbar = styled.div`
   display: flex;
@@ -54,9 +55,11 @@ export const Header = () => {
         </NavSection>
         <Logo href="/">Trello</Logo>
         <NavSection>
-          <NavButton>
-            <FaPlus />
-          </NavButton>
+          <NewBoard>
+            <NavButton>
+              <FaPlus />
+            </NavButton>
+          </NewBoard>
         </NavSection>
       </Navbar>
     </nav>
