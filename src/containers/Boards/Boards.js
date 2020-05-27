@@ -9,6 +9,8 @@ const Container = styled.div`
   justify-content: center;
   overflow-y: auto;
   height: calc(100% - 40px);
+  padding: 20px;
+  box-sizing: border-box;
 `;
 
 const BoardSection = styled.div`
@@ -16,11 +18,11 @@ const BoardSection = styled.div`
   max-width: 800px;
 `;
 
-const BoardGroup = styled.div`
+const BoardGroup = styled.section`
   margin-bottom: 20px;
 `;
 
-const BoardGroupHead = styled.div`
+const BoardGroupHead = styled.header`
   display: flex;
   margin-bottom: 10px;
   height: 32px;
@@ -32,8 +34,10 @@ const GroupIcon = styled.span`
   padding: 6px;
 `;
 
-const GroupTitle = styled.span`
+const GroupTitle = styled.h1`
+  font-size: 18px;
   line-height: 32px;
+  margin: 0;
 `;
 
 const BoardsContent = styled.div`
@@ -55,6 +59,9 @@ const Board = styled.a`
   }
 `;
 
+const IconStyle = () => `vertical-align: middle;`;
+const IconUser = styled(FaUser)(IconStyle);
+
 export const BoardsPage = () => {
   return (
     <Fragment>
@@ -65,7 +72,7 @@ export const BoardsPage = () => {
             <BoardGroup className="BoardGroup" key={key}>
               <BoardGroupHead className="BoardGroupHead">
                 <GroupIcon>
-                  <FaUser />
+                  <IconUser />
                 </GroupIcon>
                 <GroupTitle>Personal Board</GroupTitle>
               </BoardGroupHead>

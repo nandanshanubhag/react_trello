@@ -4,12 +4,13 @@ import Button from 'react-bootstrap/Button';
 import { FaHome, FaPlus } from 'react-icons/fa';
 import { NewBoard } from './NewBoard';
 
-const Navbar = styled.div`
+const Navbar = styled.nav`
   display: flex;
   justify-content: space-between;
   background-color: #026aa7;
   padding: 4px 15px;
   height: 40px;
+  box-sizing: border-box;
 `;
 const NavSection = styled.div`
   display: flex;
@@ -22,6 +23,9 @@ const NavButton = styled(Button)`
   background: #5f8bbe;
   width: 32px;
   height: 32px;
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
   &:hover,
   &:focus,
   &:active {
@@ -35,6 +39,11 @@ const HomeIcon = styled(FaHome)`
   width: 20px;
 `;
 
+const CreateIcon = styled(FaPlus)`
+  font-size: 16px;
+  vertical-align: middle;
+`;
+
 const Logo = styled.a`
   align-self: center;
   color: #eee;
@@ -46,7 +55,7 @@ const Logo = styled.a`
 
 export const Header = () => {
   return (
-    <nav>
+    <header>
       <Navbar>
         <NavSection>
           <NavButton>
@@ -57,11 +66,11 @@ export const Header = () => {
         <NavSection>
           <NewBoard>
             <NavButton>
-              <FaPlus />
+              <CreateIcon />
             </NavButton>
           </NewBoard>
         </NavSection>
       </Navbar>
-    </nav>
+    </header>
   );
 };
