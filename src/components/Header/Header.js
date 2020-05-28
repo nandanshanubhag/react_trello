@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Button from 'react-bootstrap/Button';
-import { FaHome, FaPlus } from 'react-icons/fa';
+import { FaHome } from 'react-icons/fa';
 import { NewBoard } from './NewBoard';
 
 const Navbar = styled.nav`
@@ -15,7 +15,7 @@ const Navbar = styled.nav`
 const NavSection = styled.div`
   display: flex;
 `;
-const NavButton = styled(Button)`
+export const NavButton = styled(Button)`
   border: 0;
   padding: 6px;
   color: #fff;
@@ -39,11 +39,6 @@ const HomeIcon = styled(FaHome)`
   width: 20px;
 `;
 
-const CreateIcon = styled(FaPlus)`
-  font-size: 16px;
-  vertical-align: middle;
-`;
-
 const Logo = styled.a`
   align-self: center;
   color: #eee;
@@ -64,11 +59,7 @@ export const Header = () => {
         </NavSection>
         <Logo href="/">Trello</Logo>
         <NavSection>
-          <NewBoard>
-            <NavButton>
-              <CreateIcon />
-            </NavButton>
-          </NewBoard>
+          <NewBoard />
         </NavSection>
       </Navbar>
     </header>

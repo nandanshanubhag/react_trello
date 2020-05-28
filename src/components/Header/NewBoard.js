@@ -2,6 +2,13 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Modal } from '../Modal/Modal';
 import { ModalBackdrop } from '../Modal/ModalBackdrop';
+import { FaPlus, FaClipboard } from 'react-icons/fa';
+import { NavButton } from './Header';
+
+const AddIcon = styled(FaPlus)`
+  font-size: 16px;
+  vertical-align: middle;
+`;
 
 const Container = styled.section`
   position: fixed;
@@ -28,14 +35,31 @@ const Title = styled.h1`
 `;
 
 const Menu = styled.ul`
-  padding: 10px 0;
   margin: 0;
+  padding: 0 0 10px 0;
   list-style: none;
 `;
 
 const MenuItem = styled.li`
   padding: 5px 10px;
   cursor: pointer;
+  color: #5e6c84;
+  &:hover {
+    background-color: #091e420a;
+  }
+`;
+
+const CreateIcon = styled.span`
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  text-align: center;
+`;
+
+const LinkDescription = styled.p`
+  margin: 5px 0 0 0;
+  font-size: 12px;
+  line-height: 16px;
 `;
 
 export const NewBoard = ({ children }) => {
@@ -45,7 +69,9 @@ export const NewBoard = ({ children }) => {
 
   return (
     <div onClick={showModal}>
-      {children}
+      <NavButton>
+        <AddIcon />
+      </NavButton>
       {modalShown && (
         <Modal>
           <ModalBackdrop></ModalBackdrop>
@@ -55,9 +81,18 @@ export const NewBoard = ({ children }) => {
             </Header>
             <nav>
               <Menu>
-                <MenuItem>Create Board</MenuItem>
-                <MenuItem>Two</MenuItem>
-                <MenuItem>Three</MenuItem>
+                <MenuItem>
+                  <CreateIcon>
+                    <FaClipboard />
+                  </CreateIcon>
+                  <span> Create Board </span>
+                  <LinkDescription>
+                    A board is made up of cards ordered on lists. Use it to
+                    manage projects, track information, or organize anything.
+                  </LinkDescription>
+                </MenuItem>
+                {/* <MenuItem>Two</MenuItem>
+                <MenuItem>Three</MenuItem> */}
               </Menu>
             </nav>
           </Container>
