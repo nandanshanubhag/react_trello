@@ -8,9 +8,9 @@ const Backdrop = styled.div`
   top: 0;
   bottom: 0;
   background-color: #000;
-  opacity: ${(props) => props.opacity || 0};
+  opacity: ${({ opacity }) => opacity || 0};
 `;
 
 export const ModalBackdrop = (props) => {
-  return <Backdrop {...props} />;
+  return <Backdrop onClick={props.backdropClick} {...props} />;
 };

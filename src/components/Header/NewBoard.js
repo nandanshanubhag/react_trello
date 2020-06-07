@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { Modal } from '../Modal/Modal';
-import { ModalBackdrop } from '../Modal/ModalBackdrop';
+import { Modal, ModalBackdrop } from '../Modal';
 import { FaPlus, FaClipboard } from 'react-icons/fa';
 import { NavButton } from './Header';
 
@@ -63,18 +62,18 @@ const LinkDescription = styled.p`
 `;
 
 export const NewBoard = ({ children }) => {
-  const [modalShown, toggleModal] = useState(false);
+  const [modalShown, changeModalState] = useState(false);
 
-  const showModal = () => toggleModal(!modalShown);
+  const toggleModal = () => changeModalState(!modalShown);
 
   return (
-    <div onClick={showModal}>
-      <NavButton>
+    <div>
+      <NavButton onClick={toggleModal}>
         <AddIcon />
       </NavButton>
       {modalShown && (
         <Modal>
-          <ModalBackdrop></ModalBackdrop>
+          <ModalBackdrop backdropClick={toggleModal}></ModalBackdrop>
           <Container>
             <Header>
               <Title>Create</Title>
