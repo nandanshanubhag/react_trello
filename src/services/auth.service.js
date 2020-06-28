@@ -11,7 +11,7 @@ const handleResponse = (response) => {
       if (response.status === 401) {
       }
 
-      const error = (data && data.error) || response.statusText;
+      const error = data || response.statusText;
       return Promise.reject(error);
     }
 
@@ -19,24 +19,27 @@ const handleResponse = (response) => {
   });
 };
 
-const login = (email, password) => {
+const login = async (email, password) => {
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password })
   };
-  return fetch('http://localhost:3001/api/users/login', options).then(
-    handleResponse
+  const response = await fetch(
+    'http://localhost:3001/api/users/login',
+    options
   );
+  return handleResponse(response);
 };
 
-const register = (email, password) => {
+const register = async (email, password) => {
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, password })
   };
-  return fetch('http://localhost:3001/api/users', options).then(handleResponse);
+  const response = await fetch('http://localhost:3001/api/users', options);
+  return handleResponse(response);
 };
 
 export const authService = {
