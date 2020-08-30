@@ -7,10 +7,20 @@ import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 import { store } from "./store";
 
+import { Provider as StyletronProvider, DebugEngine } from "styletron-react";
+import { Client as Styletron } from "styletron-engine-atomic";
+
+const debug =
+  process.env.NODE_ENV === "production" ? void 0 : new DebugEngine();
+
+const engine = new Styletron();
+
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <StyletronProvider value={engine} debug={debug} debugAfterHydration>
+        <App />
+      </StyletronProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")

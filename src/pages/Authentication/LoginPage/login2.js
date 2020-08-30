@@ -1,7 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import validator from 'validator';
+import { Button, SIZE } from "baseui/button";
+
+import history from 'utils/history';
+import { checkIsValid } from 'utils/validator';
 
 import { useAuthContext, loginSuccess } from '../AuthContext';
 import { authService } from '../../../services/auth.service';
@@ -40,18 +43,14 @@ export const LoginPage2 = () => {
         .login(email.value, password.value)
         .then(({ user }) => {
           dispatch(loginSuccess(user));
+          setLoading(false);
+          history.push('/');
         })
         .catch((error) => {
           setLoginError(error.message || 'Failed to Login');
+          setLoading(false);
         });
     }
-  };
-
-  const checkIsValid = (name, value) => {
-    if (name === 'email') {
-      return validator.isEmail(value);
-    }
-    return !!value;
   };
 
   const formControlClass = (control) => {
@@ -109,12 +108,13 @@ export const LoginPage2 = () => {
               <div className="invalid-feedback">Password is required</div>
             )}
           </div>
-          <button
-            type={false ? 'button' : 'submit'}
-            className="btn btn-primary"
+          <Button
+            type={loading ? 'button' : 'submit'}
+            size={SIZE.mini}
+            isLoading={loading}
           >
-            {false ? 'Please wait...' : 'Login'}
-          </button>
+            {loading ? 'Please wait...' : 'Login'}
+          </Button>
           <Link to="/register" className="btn btn-link">
             Register
           </Link>
